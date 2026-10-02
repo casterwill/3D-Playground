@@ -1,7 +1,4 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/Editor/SimpleCustomEditor.uss?fileID=7433441132597879392&amp;guid=97aa87cfc68ca6749a7bd08b3e9d09bf&amp;type=3#SimpleCustomEditor"/>
-    <ui:Label text="Hello World! From UXML"/>
-    <ui:Label text="Hello World! With Style" class="custom-label"/>
-    <ui:Button text="ESX"/>
-    <ui:Toggle label="Tugel"/>
+    <Style src="project://database/Assets/Starter%20Assets/Playground/Editor/SimpleCustomEditor.uss?fileID=7433441132597879392&amp;guid=97aa87cfc68ca6749a7bd08b3e9d09bf&amp;type=3#SimpleCustomEditor"/>
+    <ui:Label text="NPC dialogue" enabled="true" name="Dialogue" style="justify-content: flex-end; -unity-text-align: upper-center; bottom: -276px; left: auto; align-items: flex-end; align-self: stretch; align-content: stretch; -unity-font-style: normal; font-size: 12px; -unity-text-outline-width: 0; opacity: 1; display: flex; visibility: visible;"/>
 </ui:UXML>

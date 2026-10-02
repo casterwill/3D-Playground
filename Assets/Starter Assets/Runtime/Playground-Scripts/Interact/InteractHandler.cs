@@ -5,6 +5,21 @@ namespace StarterAssets
 {
     public class InteractHandler : MonoBehaviour
     {
+        public static InteractHandler Instance { get; private set; }
+
+        private void Awake()
+        {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this.gameObject);
+                return;
+            }
+            else
+            {
+                Instance = this;
+            }
+        }
+
         public enum InteractType
         {
             None,
@@ -15,29 +30,24 @@ namespace StarterAssets
 
         private InteractType currentInteractType = InteractType.None;
 
-        private static readonly Lazy<InteractHandler> _instance = new Lazy<InteractHandler>(() => new InteractHandler());
+        private ScreenUI screenUI;
 
-        public static InteractHandler Instance => _instance.Value;
-
-        private InteractHandler()
+        private void Start()
         {
-        }
-
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            screenUI = ScreenUI.Instance;
         }
 
         public void DoInteract()
         {
-            Debug.Log("Interact : " + currentInteractType);
+            switch (currentInteractType)
+            {
+                case InteractType.Quest:
+                    //Queast
+                    break;
+                case InteractType.Dialogue:
+                    screenUI.ShowDialogue("Howdy!");
+                    break;
+            }
         }
 
         public void SetInteractType(InteractType interactType)

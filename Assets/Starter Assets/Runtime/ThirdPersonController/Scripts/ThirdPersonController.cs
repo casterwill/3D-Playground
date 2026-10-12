@@ -98,6 +98,7 @@ namespace StarterAssets
         private int _animIDJump;
         private int _animIDFreeFall;
         private int _animIDMotionSpeed;
+        private int _animIDLightAttack;
 
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
@@ -108,7 +109,7 @@ namespace StarterAssets
         private GameObject _mainCamera;
 
         private InteractHandler _interactHandler;
-
+        private SixthSense sixthSense;
             
         private const float _threshold = 0.01f;
 
@@ -141,6 +142,7 @@ namespace StarterAssets
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
 
             _interactHandler = InteractHandler.Instance;
+            sixthSense = SixthSense.Instance;
 
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
@@ -166,6 +168,8 @@ namespace StarterAssets
             GroundedCheck();
             Move();
             Interact();
+            SixthSenseInput();
+            OnLightAttack();
         }
 
         private void LateUpdate()
@@ -180,6 +184,7 @@ namespace StarterAssets
             _animIDJump = Animator.StringToHash("Jump");
             _animIDFreeFall = Animator.StringToHash("FreeFall");
             _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            _animIDLightAttack = Animator.StringToHash("LightAttack");
         }
 
         private void GroundedCheck()
@@ -361,6 +366,24 @@ namespace StarterAssets
             {
                 _interactHandler.DoInteract();
                 _input.interact = false; // Reset the interact input after processing
+            }
+        }
+
+        private void SixthSenseInput()
+        {
+            if (_input.sixthSense)
+            {
+                sixthSense.ToggleSense();
+                _input.sixthSense = false; // Reset the sixth sense input after processing
+            }
+        }
+
+        private void OnLightAttack()
+        {
+            if (_input.lightAttack)
+            {
+                _animator.SetTrigger(_animIDLightAttack);
+                _input.lightAttack = false;
             }
         }
 

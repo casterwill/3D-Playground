@@ -1,4 +1,6 @@
 using System;
+using System.Collections;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -54,14 +56,17 @@ namespace StarterAssets
             }
         }
 
-        public void ShowDialogue(string text)
+        public IEnumerator ShowDialogue(string text)
         {
             if (dialogueText != null)
             {
-                Debug.Log("Showing dialogue: " + text);
                 dialogueText.text = text;
                 dialogueText.visible = true;
+                Debug.Log("Showing dialogue: " + text);
+
+                yield return new WaitForSeconds(2f);
+                dialogueText.visible = false;
             }
         }
-    }
+    }   
 }

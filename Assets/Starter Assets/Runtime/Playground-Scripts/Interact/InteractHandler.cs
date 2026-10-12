@@ -42,10 +42,13 @@ namespace StarterAssets
             switch (currentInteractType)
             {
                 case InteractType.Quest:
-                    //Queast
+                    //Quest
                     break;
                 case InteractType.Dialogue:
-                    screenUI.ShowDialogue("Howdy!");
+                    StartCoroutine(screenUI.ShowDialogue("Howdy!"));
+                    break;
+                default:
+                    Debug.Log("No interaction available.");
                     break;
             }
         }

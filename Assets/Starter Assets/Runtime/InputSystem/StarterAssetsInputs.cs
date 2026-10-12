@@ -13,8 +13,10 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool interact;
+		public bool sixthSense;
+		public bool lightAttack;
 
-		[Header("Movement Settings")]
+        [Header("Movement Settings")]
 		public bool analogMovement;
 
 		[Header("Mouse Cursor Settings")]
@@ -49,10 +51,21 @@ namespace StarterAssets
         {
             InteractInput(value.isPressed);
         }
+
+        public void OnSixthSense(InputValue value)
+        {
+            SixthSenseInput(value.isPressed);
+        }
+
+		public void OnLightAttack(InputValue value)
+        {
+            LightAttackInput(value.isPressed);
+        }
+        
 #endif
 
 
-		public void MoveInput(Vector2 newMoveDirection)
+        public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;
 		} 
@@ -75,6 +88,16 @@ namespace StarterAssets
 		public void InteractInput(bool newInteractState)
         {
             interact = newInteractState;
+        }
+
+        public void SixthSenseInput(bool newSixthSenseState)
+        {
+            sixthSense = newSixthSenseState;
+        }
+
+        public void LightAttackInput(bool newLightAttackState)
+        {
+            lightAttack = newLightAttackState;
         }
 
         private void OnApplicationFocus(bool hasFocus)

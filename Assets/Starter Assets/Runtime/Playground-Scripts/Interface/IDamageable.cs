@@ -1,0 +1,9 @@
+using UnityEngine;
+
+namespace StarterAssets
+{
+    public interface IDamageable
+    {
+        void TakeDamage(int damage, Vector3 hitPoint);
+    }
+}

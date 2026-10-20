@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
+
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -128,8 +130,20 @@ namespace StarterAssets
         }
 
 
+        public static ThirdPersonController Instance { get; private set; }
+
         private void Awake()
         {
+            if (Instance != null && Instance != this)
+            {
+                Destroy(this.gameObject);
+                return;
+            }
+            else
+            {
+                Instance = this;
+            }
+
             // get a reference to our main camera
             if (_mainCamera == null)
             {
@@ -378,12 +392,16 @@ namespace StarterAssets
             }
         }
 
+        public UnityEvent OnLightAttackStart;
+        public UnityEvent OnLightAttackEnd;
+
         private void OnLightAttack()
         {
             if (_input.lightAttack)
             {
                 _animator.SetTrigger(_animIDLightAttack);
                 _input.lightAttack = false;
+                OnLightAttackStart?.Invoke();
             }
         }
 

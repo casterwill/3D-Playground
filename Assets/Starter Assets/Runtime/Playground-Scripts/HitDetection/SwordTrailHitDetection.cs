@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine.Events;
+using TextMateSharp.Grammars;
 
 namespace StarterAssets
 {
@@ -13,6 +14,10 @@ namespace StarterAssets
         [SerializeField] private LayerMask hittableLayers;
         [SerializeField] private int damage = 15;
         [SerializeField] private float hitCooldown = 0.1f;
+
+        [Header("Hit Trail")]
+        [SerializeField] private bool EnableSwordHitTrail = true;
+        [SerializeField] private TrailRenderer swordHitTrail;
 
         private Vector3 previousTipPos;
         private Vector3 previousBasePos;
@@ -55,6 +60,8 @@ namespace StarterAssets
         {
             if (!isSwinging)
             {
+                if (swordHitTrail && EnableSwordHitTrail) swordHitTrail.emitting = true;
+
                 isSwinging = true;
                 hitThisSwing.Clear();
                 previousTipPos = swordTip.position;
@@ -66,6 +73,7 @@ namespace StarterAssets
 
         public void OnSwingEnd()
         {
+            if (swordHitTrail && EnableSwordHitTrail) swordHitTrail.emitting = false;
             isSwinging = false;
         }
 

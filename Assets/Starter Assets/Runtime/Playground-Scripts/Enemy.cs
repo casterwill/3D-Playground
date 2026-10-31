@@ -5,7 +5,9 @@ namespace StarterAssets
 {
     public class Enemy : MonoBehaviour, IDamageable
     {
-        [SerializeField] private Color hitColor;
+        [SerializeField] private Color hitFlashColor;
+        [SerializeField] private float hitFlashDuration = 1f;
+
         private Material[] materials;
         private Color originalColor;
 
@@ -26,10 +28,10 @@ namespace StarterAssets
         {
             foreach (var material in materials)
             {
-                material.color = hitColor;
+                material.color = hitFlashColor;
             }
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(hitFlashDuration);
 
             foreach (var material in materials)
             {
